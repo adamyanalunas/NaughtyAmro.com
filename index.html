@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Naughty Amro</title>
+	
+	<link rel="stylesheet" href="css/bubbles.css" type="text/css">
+	<style type="text/css">
+		body {
+		    padding:0; 
+		    margin:0; 
+		    font:1em/1.4 Cambria, Georgia, sans-serif; 
+		    color:#333; 
+		    background:#fff;
+			text-align: right;
+		}
+		
+		#content {
+			width: 800px;
+			margin: 0 auto;
+			position: relative;
+		}
+		
+		#amro {
+			position: relative;
+			float: left;
+			z-index: -1;
+			margin: -300px 0 0 -100px;
+		}
+		
+		.bubble {
+			width: 400px;
+			margin-right: -100px;
+			/*-moz-box-shadow: 0 0 5px 5px rgba(235, 217, 18, .5);*/
+			/*-webkit-box-shadow: 0 0 7px 7px rgba(185, 167, 0, .5);*/
+			/*box-shadow: 0 0 5px 5px rgba(235, 217, 18, .5);*/
+			background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
+		    background:-moz-linear-gradient(#f9d835, #f3961c);
+		    background:-o-linear-gradient(#f9d835, #f3961c);
+		    background:linear-gradient(#f9d835, #f3961c);
+		}
+		
+		.bubble p {
+		}
+		.oval-quotes p:after {
+			border-right-color: #f3961c;
+		}
+	</style>
+	
+	<script>
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-333228-7']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</head>
+<body>
+	
+	<div id="content">
+		<blockquote class="bubble oval-quotes" cite="http://www.naughtyamro.com">
+			<p><span id="naughtiness">&hellip;</span></p>
+		</blockquote>
+		<div id="amro"><img src="images/NaughtyAmro.png" width="800" height="656" alt="AMRO IS SOOOOO NAUGHTY!"></div>
+	</div>
+	
+	<script>
+		(function(){
+			//Let's make Amro naughty!
+			var naughties = [
+				{phrase: 'Have you ever touched a carnie’s butt? It’s heaven.'},
+				{phrase: 'I am not recommending murdering a prostitute. But have you tried it?'},
+				{phrase: 'I know what underwear you’re wearing and it is very sexy. Very.'},
+				{phrase: 'There aren’t monsters under the bed. Just me.'},
+				{phrase: 'Your mother calls me her “milk man”. Think about it.'}
+				];
+			var naughty = Math.floor(Math.random() * naughties.length);
+			document.getElementById('naughtiness').innerHTML = naughties[naughty].phrase;
+		}());
+	</script>
+</body>
+</html>
