@@ -72,27 +72,31 @@
 		<div id="amro">
 			<img src="images/NaughtyAmro.png" width="800" height="656" alt="AMRO IS SOOOOO NAUGHTY!">
 			<blockquote class="bubble oval-quotes" cite="http://www.naughtyamro.com">
-				<p><span id="naughtiness">&hellip;Hi, I'm watching you&hellip;watching me&hellip;</span></p>
+				<p><span id="naughtiness">&hellip;</span></p>
 			</blockquote>	
 		</div>
 	</div>
 	
 	<script>
-		var getNaughty = setInterval(function(){
+		(function(){
 			//Let's make Amro naughty!
-			var naughties = [
-				{phrase: 'Have you ever touched a carnie’s butt? It’s heaven.'},
-				{phrase: 'I am not recommending murdering a prostitute. But have you tried it?'},
-				{phrase: 'I know what underwear you’re wearing and it is very sexy. Very.'},
-				{phrase: 'There aren’t monsters under the bed. Just me.'},
-				{phrase: 'Your mother calls me her “milk man”. Think about it.'},
-				{phrase: 'Are you a giving tree, or a receiving tree?'},
-				{phrase: 'Whoever can swallow the most Tylenol PM wins!'}
-				];
-			var naughty = Math.floor(Math.random() * naughties.length);
-			document.getElementById('naughtiness').innerHTML = naughties[naughty].phrase;
-		},3500);
-		getNaughty();
+			function getNaughty() {
+				var naughties = [
+					{phrase: 'Have you ever touched a carnie’s butt? It’s heaven.'},
+					{phrase: 'I am not recommending murdering a prostitute. But have you tried it?'},
+					{phrase: 'I know what underwear you’re wearing and it is very sexy. Very.'},
+					{phrase: 'There aren’t monsters under the bed. Just me.'},
+					{phrase: 'Your mother calls me her “milk man”. Think about it.'},
+					{phrase: 'Are you a giving tree, or a receiving tree?'},
+					{phrase: 'Whoever can swallow the most Tylenol PM wins!'}
+					];
+				var naughty = Math.floor(Math.random() * naughties.length);
+				document.getElementById('naughtiness').innerHTML = naughties[naughty].phrase;
+			};
+			
+			setInterval(getNaughty, 3500);
+			getNaughty();
+		}());
 	</script>
 </body>
 </html>
