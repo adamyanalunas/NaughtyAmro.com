@@ -80,6 +80,7 @@
 	<script>
 		(function(){
 			//Let's make Amro naughty!
+			var previous = -1;
 			function getNaughty() {
 				var naughties = [
 					{phrase: 'Have you ever touched a carnie’s butt? It’s heaven.'},
@@ -88,10 +89,15 @@
 					{phrase: 'There aren’t monsters under the bed. Just me.'},
 					{phrase: 'Your mother calls me her “milk man”. Think about it.'},
 					{phrase: 'Are you a giving tree, or a receiving tree?'},
-					{phrase: 'Whoever can swallow the most Tylenol PM wins!'}
+					{phrase: 'Whoever can swallow the most Tylenol PM wins!'},
 					{phrase: 'I don’t always stalk women but when I do I use this face.'}
 					];
 				var naughty = Math.floor(Math.random() * naughties.length);
+				if (previous === naughty) {
+					getNaughty();
+					return;
+				}
+				previous = naughty;
 				document.getElementById('naughtiness').innerHTML = naughties[naughty].phrase;
 			};
 			
