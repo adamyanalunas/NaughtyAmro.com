@@ -14,6 +14,10 @@
 			text-align: right;
 		}
 		
+		.oval-quotes p:after {
+			border-right-color: #f3961c;
+		}
+		
 		#content {
 			width: 800px;
 			margin: 0 auto;
@@ -36,19 +40,33 @@
 			right: 0;
 			width: 400px;
 			margin-right: -100px;
-			/*-moz-box-shadow: 0 0 5px 5px rgba(235, 217, 18, .5);*/
-			/*-webkit-box-shadow: 0 0 7px 7px rgba(185, 167, 0, .5);*/
-			/*box-shadow: 0 0 5px 5px rgba(235, 217, 18, .5);*/
 			background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
 		    background:-moz-linear-gradient(#f9d835, #f3961c);
 		    background:-o-linear-gradient(#f9d835, #f3961c);
 		    background:linear-gradient(#f9d835, #f3961c);
 		}
 		
-		.bubble p {
+		.bubble:hover #permanentNaughty {
+			opacity: 1;
 		}
-		.oval-quotes p:after {
-			border-right-color: #f3961c;
+		
+		#naughtiness, #permanentNaughty a {
+			text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px;
+		}
+		
+		#permanentNaughty {
+			opacity: .3;
+			color: #aeaeae;
+		}
+		
+		#permanentNaughty a {
+			color: #355E93;
+			margin: 0 0 0 6px;
+		}
+		
+		a {
+			text-decoration: none;
+			color: #000;
 		}
 	</style>
 	
@@ -68,41 +86,68 @@
 </head>
 <body>
 	
-	<div id="content">
+	<!-- <div id="content"> -->
 		<div id="amro">
 			<img src="images/NaughtyAmro.png" width="800" height="656" alt="AMRO IS SOOOOO NAUGHTY!">
 			<blockquote class="bubble oval-quotes" cite="http://www.naughtyamro.com">
-				<p><span id="naughtiness">&hellip;</span></p>
+				<p><span id="naughtiness">I&rsquo;m thinking of something very naughty right now&hellip;</span><sup><span id="permanentNaughty">#</span></sup></p>
 			</blockquote>	
 		</div>
-	</div>
+	<!-- </div> -->
 	
 	<script>
 		(function(){
 			//Let's make Amro naughty!
 			var previous = -1;
-			function getNaughty() {
-				var naughties = [
-					{phrase: 'Have you ever touched a carnie’s butt? It’s heaven.'},
-					{phrase: 'I am not recommending murdering a prostitute. But have you tried it?'},
-					{phrase: 'I know what underwear you’re wearing and it is very sexy. Very.'},
-					{phrase: 'There aren’t monsters under the bed. Just me.'},
-					{phrase: 'Your mother calls me her “milk man”. Think about it.'},
-					{phrase: 'Are you a giving tree, or a receiving tree?'},
-					{phrase: 'Whoever can swallow the most Tylenol PM wins!'},
-					{phrase: 'I don’t always stalk women but when I do I use this face.'}
-					];
-				var naughty = Math.floor(Math.random() * naughties.length);
+			var naughties = [
+				{code: 'b17815', phrase: 'Have you ever touched a carnie’s butt? It’s heaven.'},
+				{code: 'f0ee39', phrase: 'I am not recommending murdering a prostitute. But have you tried it?'},
+				{code: 'f7dbfc', phrase: 'I know what underwear you’re wearing and it is very sexy. Very.'},
+				{code: 'a0d54f', phrase: 'There aren’t monsters under the bed. Just me.'},
+				{code: 'c1a572', phrase: 'Your mother calls me her “milk man”. Think about it.'},
+				{code: 'dba067', phrase: 'Are you a giving tree, or a receiving tree?'},
+				{code: 'd15745', phrase: 'Whoever can swallow the most Tylenol PM wins!'},
+				{code: 'ab77f3', phrase: 'I don’t always stalk women but when I do I use this face.'}
+				];
+			
+			function chooseNaughtiness(choices) {
+				var naughty = Math.floor(Math.random() * choices.length);
 				if (previous === naughty) {
-					getNaughty();
+					chooseNaughtiness(choices)
 					return;
 				}
 				previous = naughty;
-				document.getElementById('naughtiness').innerHTML = naughties[naughty].phrase;
+				makeNaughty(choices[naughty]);
 			};
 			
-			setInterval(getNaughty, 3500);
-			getNaughty();
+			function makeNaughty(naughtyPackage) {
+				document.getElementById('naughtiness').innerHTML = naughtyPackage.phrase;
+				
+				var perm = document.getElementById('permanentNaughty');
+					perm.innerHTML = '<a href="#' + naughtyPackage.code + '">#</a>';
+					perm.onclick = function(){ document.location.href = '#' + naughtyPackage.code; };
+			};
+			
+			function loopNaughties() {
+				setInterval(chooseNaughtiness, 3500, naughties);
+				chooseNaughtiness(naughties);	
+			};
+			
+			(function init() {
+				if(document.location.hash.length > 0) {
+					var hash = document.location.hash.substring(1, document.location.hash.length);
+					for(var i=0, len=naughties.length; i<len; i++) {
+						if(naughties[i].code === hash) {
+							makeNaughty(naughties[i]);
+							return;
+						}
+					}
+					//Only get here if no naughty hash found
+					loopNaughties();
+				} else {
+					loopNaughties();
+				}
+			})();
 		}());
 	</script>
 </body>
